@@ -11,7 +11,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
             if (joinButton) {
               setTimeout(() => {
                 joinButton.click();
-              }, 5000);
+              }, 8000);
               return true;
             }
             return false;
