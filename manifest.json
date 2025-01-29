@@ -5,9 +5,15 @@
   "permissions": ["alarms", "tabs", "scripting", "storage"],
   "host_permissions": ["https://meet.google.com/*"],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": "icons/icon.jpg"
   },
   "background": {
     "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icons/icon.jpg",
+    "48": "icons/icon.jpg",
+    "128": "icons/icon.jpg"
   }
 }

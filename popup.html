@@ -1,45 +1,117 @@
+<!-- popup.html -->
 <!DOCTYPE html>
 <html>
   <head>
     <style>
       body {
-        font-family: Arial, sans-serif;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 200px;
-        width: 300px;
-        margin: 0;
-        padding: 20px;
-        box-sizing: border-box;
-        background-color: #f4f4f4;
+          width: 400px;
+          padding: 15px;
+          font-family: 'Segoe UI', sans-serif;
+          background: #f5f5f5;
       }
-      input {
-        margin: 10px 0;
-        padding: 10px;
-        width: 100%;
-        border: 1px solid #ccc;
-        border-radius: 4px;
+
+      .header {
+          margin-bottom: 20px;
+          padding-bottom: 10px;
+          border-bottom: 1px solid #ddd;
       }
+
+      .form-group {
+          margin-bottom: 15px;
+      }
+
+      input[type="url"], input[type="datetime-local"], input[type = "text"] {
+          width: 100%;
+          padding: 8px;
+          margin: 5px 0;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          box-sizing: border-box;
+      }
+
       button {
-        padding: 10px;
-        width: 100%;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
+          background: #007bff;
+          color: white;
+          border: none;
+          padding: 8px 15px;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: background 0.3s;
       }
+
       button:hover {
-        background-color: #45a049;
+          background: #0056b3;
       }
+
+      .meeting-list {
+          margin-top: 20px;
+      }
+
+      .meeting-item {
+          background: white;
+          padding: 15px;
+          margin: 10px 0;
+          border-radius: 4px;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+      }
+
+      .meeting-info {
+          flex-grow: 1;
+      }
+
+      .meeting-actions button {
+          margin-left: 5px;
+          padding: 5px 10px;
+          font-size: 0.8em;
+      }
+
+      .delete-btn {
+          background: #dc3545;
+      }
+
+      .delete-btn:hover {
+          background: #bb2d3b;
+      }
+
+      .meeting-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .past-meeting {
+            opacity: 0.6;
+            text-decoration: line-through;
+            background: #f8f9fa;
+        }
+
+        .optional-field {
+            color: #666;
+            font-style: italic;
+        }
     </style>
   </head>
   <body>
-    <input type="url" id="meetingLink" placeholder="Google Meet Link" />
-    <input type="datetime-local" id="meetingTime" />
-    <button id="schedule">Schedule</button>
+    <div class="header">
+      <h2>Auto Google Meeting Joiner</h2>
+    </div>
+
+    <div class="form-group">
+      <input
+        type="text"
+        id="meetingName"
+        placeholder="Meeting name (optional)"
+        class="optional-field"
+      />
+      <input type="url" id="meetingLink" placeholder="Google Meet Link" />
+      <input type="datetime-local" id="meetingTime" />
+      <button id="saveMeeting">Schedule Meeting</button>
+    </div>
+
+    <div class="meeting-list" id="meetingList"></div>
+
     <script src="popup.js"></script>
   </body>
 </html>

@@ -1,13 +1,16 @@
+// background.js
 chrome.alarms.onAlarm.addListener(async (alarm) => {
-  if (alarm.name === "joinMeeting") {
-    const { meetingLink } = await chrome.storage.local.get("meetingLink");
+  const { meetings = [] } = await chrome.storage.local.get(["meetings"]);
+  const meeting = meetings.find((m) => m.id === alarm.name);
 
-    chrome.tabs.create({ url: meetingLink }, (tab) => {
+  if (meeting) {
+    chrome.tabs.create({ url: meeting.link }, (tab) => {
       chrome.scripting.executeScript({
         target: { tabId: tab.id },
         func: () => {
+          const joinButtonSelector = ".UywwFc-RLmnJb";
           const attemptJoin = () => {
-            const joinButton = document.querySelector(".UywwFc-RLmnJb");
+            const joinButton = document.querySelector(joinButtonSelector);
             if (joinButton) {
               setTimeout(() => {
                 joinButton.click();
@@ -18,8 +21,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
           };
 
           if (!attemptJoin()) {
-            const observer = new MutationObserver(attemptJoin);
-            observer.observe(document.body, {
+            new MutationObserver(attemptJoin).observe(document.body, {
               childList: true,
               subtree: true,
             });
